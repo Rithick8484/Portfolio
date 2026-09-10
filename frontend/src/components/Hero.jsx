@@ -1,55 +1,9 @@
-import React, { useState } from 'react';
-import { ArrowRight, Download, Mail, Code2, Sparkles, Terminal, Shield, Layers } from 'lucide-react';
+import React from 'react';
+import { ArrowRight, Download, Mail, Code2, Sparkles, Flame, CheckCircle2 } from 'lucide-react';
 import { GithubIcon, LinkedinIcon, LeetcodeIcon } from './BrandIcons';
 import { PROFILE } from '../config/profile';
 
-const codeSnippets = {
-  controller: `// Spring Boot REST Controller
-@RestController
-@RequestMapping("/api/employees")
-public class EmployeeController {
-
-    private final EmployeeService service;
-
-    @PostMapping
-    public ResponseEntity<Employee> create(
-        @Valid @RequestBody EmployeeDto dto) {
-        return ResponseEntity.status(CREATED)
-            .body(service.saveEmployee(dto));
-    }
-}`,
-  security: `// JWT Security Configuration
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig {
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) {
-        return http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .anyRequest().authenticated())
-            .addFilterBefore(jwtFilter, UsernamePasswordAuthFilter.class)
-            .build();
-    }
-}`,
-  service: `// Smart Waste Predictor API
-@Service
-public class OverflowPredictorService {
-
-    public OverflowRisk assessFillTrend(BinSensorLog telemetry) {
-        double fillRate = telemetry.calculateDeltaPerHour();
-        return fillRate > CRITICAL_THRESHOLD 
-            ? OverflowRisk.HIGH_ALERT 
-            : OverflowRisk.OPTIMAL;
-    }
-}`
-};
-
 export default function Hero() {
-  const [activeCodeTab, setActiveCodeTab] = useState('controller');
-
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -125,39 +79,44 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: Interactive Code Inspector */}
-          <div>
-            <div className="code-card">
-              <div className="code-header">
-                <div className="code-dots">
-                  <span className="code-dot dot-red"></span>
-                  <span className="code-dot dot-yellow"></span>
-                  <span className="code-dot dot-green"></span>
+          {/* Right: Rithick's Profile Photo */}
+          <div className="hero-photo-container">
+            <div className="hero-photo-glow-backdrop"></div>
+            <div className="hero-photo-frame">
+              <img
+                src={PROFILE.profileImage}
+                alt={PROFILE.name}
+                className="hero-photo"
+                onError={(e) => {
+                  e.target.src = '/profile.jpg';
+                }}
+              />
+              <div className="hero-photo-overlay"></div>
+            </div>
+
+            {/* Floating Badges */}
+            <div className="hero-floating-badge badge-top">
+              <span className="pulse-dot"></span>
+              <div>
+                <div style={{ fontSize: '0.72rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Specialization
                 </div>
-                <div className="code-tabs">
-                  <button
-                    className={`code-tab-btn ${activeCodeTab === 'controller' ? 'active' : ''}`}
-                    onClick={() => setActiveCodeTab('controller')}
-                  >
-                    Controller.java
-                  </button>
-                  <button
-                    className={`code-tab-btn ${activeCodeTab === 'security' ? 'active' : ''}`}
-                    onClick={() => setActiveCodeTab('security')}
-                  >
-                    Security.java
-                  </button>
-                  <button
-                    className={`code-tab-btn ${activeCodeTab === 'service' ? 'active' : ''}`}
-                    onClick={() => setActiveCodeTab('service')}
-                  >
-                    Predictor.java
-                  </button>
+                <div style={{ fontSize: '0.86rem', fontWeight: 700, color: '#fff' }}>
+                  Java & Spring Boot
                 </div>
               </div>
-              <pre className="code-content">
-                <code>{codeSnippets[activeCodeTab]}</code>
-              </pre>
+            </div>
+
+            <div className="hero-floating-badge badge-bottom">
+              <span style={{ fontSize: '1.2rem' }}>🔥</span>
+              <div>
+                <div style={{ fontSize: '0.72rem', color: '#fbbf24', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Daily Discipline
+                </div>
+                <div style={{ fontSize: '0.86rem', fontWeight: 700, color: '#fff' }}>
+                  110+ Day LeetCode Streak
+                </div>
+              </div>
             </div>
           </div>
         </div>

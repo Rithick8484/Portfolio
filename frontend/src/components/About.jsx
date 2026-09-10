@@ -1,6 +1,13 @@
 import React from 'react';
-import { User, Code2, GraduationCap, Building2, MapPin, CheckCircle2, Download, Sparkles, Flame, Award } from 'lucide-react';
+import { User, Code2, GraduationCap, Building2, MapPin, CheckCircle2, Download, Sparkles, Server, Database, ShieldCheck, Terminal } from 'lucide-react';
 import { PROFILE } from '../config/profile';
+
+const quickCards = [
+  { label: 'Role', value: PROFILE.primaryRole, icon: Code2, color: '#a78bfa' },
+  { label: 'Degree', value: 'B.Tech IT (2024–2028)', icon: GraduationCap, color: '#60a5fa' },
+  { label: 'Institution', value: 'Sri Krishna College of Tech', icon: Building2, color: '#34d399' },
+  { label: 'Location', value: PROFILE.location, icon: MapPin, color: '#fbbf24' },
+];
 
 export default function About() {
   return (
@@ -20,36 +27,85 @@ export default function About() {
         </div>
 
         <div className="about-bento">
-          {/* Bento Card 1: Framed Photo & Badges */}
-          <div className="bento-card about-photo-card">
-            <div className="about-photo-wrapper">
-              <img
-                src={PROFILE.profileImage}
-                alt={PROFILE.name}
-                className="about-photo"
-                onError={(e) => {
-                  e.target.src = 'https://images.unsplash.com/photo-1534972195531-a756b1126f24?auto=format&fit=crop&w=800&q=80';
-                }}
-              />
+          {/* Bento Card 1: Developer Credentials & Quick Info */}
+          <div className="bento-card" style={{ padding: '32px', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '22px' }}>
+              <Terminal size={20} color="#a78bfa" />
+              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Developer Credentials
+              </span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#e2e8f0', fontSize: '0.92rem', fontWeight: 600 }}>
-                <MapPin size={16} color="#f59e0b" />
-                <span>{PROFILE.location}</span>
+            {/* Quick Cards */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '28px' }}>
+              {quickCards.map((qc, idx) => {
+                const IconComponent = qc.icon;
+                return (
+                  <div
+                    key={idx}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.025)',
+                      border: '1px solid var(--border-glass)',
+                      borderRadius: '12px',
+                      padding: '14px 18px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '14px',
+                      transition: 'var(--transition)',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '38px',
+                        height: '38px',
+                        borderRadius: '10px',
+                        background: 'rgba(255, 255, 255, 0.04)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: qc.color,
+                        flexShrink: 0,
+                      }}
+                    >
+                      <IconComponent size={18} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: '0.72rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        {qc.label}
+                      </div>
+                      <div style={{ fontSize: '0.94rem', fontWeight: 600, color: '#fff', marginTop: '2px' }}>
+                        {qc.value}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Engineering Pillars Box */}
+            <div
+              style={{
+                marginTop: 'auto',
+                padding: '18px',
+                background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%)',
+                border: '1px solid rgba(139, 92, 246, 0.25)',
+                borderRadius: '12px',
+              }}
+            >
+              <div style={{ fontSize: '0.75rem', fontWeight: 700, color: '#fbbf24', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '8px' }}>
+                Engineering Focus
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#94a3b8', fontSize: '0.88rem' }}>
-                <Building2 size={16} color="#8b5cf6" />
-                <span>{PROFILE.quickInfo[2].value}</span>
-              </div>
+              <p style={{ fontSize: '0.86rem', color: '#cbd5e1', lineHeight: '1.6' }}>
+                Focusing on building maintainable enterprise backend services, transactional data integrity, and secure RESTful communication.
+              </p>
             </div>
           </div>
 
           {/* Bento Card 2: Career Objective & Stats */}
           <div className="bento-card" style={{ padding: '34px', display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-              <Sparkles size={18} color="#a78bfa" />
-              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <Sparkles size={18} color="#fbbf24" />
+              <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#fbbf24', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Career Objective
               </span>
             </div>
