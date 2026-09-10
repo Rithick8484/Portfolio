@@ -11,14 +11,22 @@ import Coding from './components/Coding';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ParticleBackground from './components/ParticleBackground';
+import CustomCursor from './components/CustomCursor';
 
 export default function App() {
   return (
     <div className="portfolio-app">
-      {/* Background Matrix Grid Overlay */}
+      {/* Interactive Custom Cursor System */}
+      <CustomCursor />
+
+      {/* Live Animated Interactive Particle Mesh Background */}
+      <ParticleBackground />
+
+      {/* Subtle Matrix Grid Overlay */}
       <div className="bg-grid-overlay" aria-hidden="true" />
 
-      {/* Modern Floating Navbar */}
+      {/* Modern Floating Capsule Navbar */}
       <Navbar />
 
       {/* Main Sections */}

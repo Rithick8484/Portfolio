@@ -1349,3 +1349,107 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   CUSTOM CURSOR & AMBIENT FLASHLIGHT GLOW
+   ========================================================================== */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-violet-light);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate3d(-100px, -100px, 0);
+  margin-top: -4px;
+  margin-left: -4px;
+  opacity: 0;
+  transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.9);
+}
+
+.cursor-dot.visible {
+  opacity: 1;
+}
+
+.cursor-dot.hovered {
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  margin-left: -6px;
+  background-color: var(--accent-amber-light);
+  box-shadow: 0 0 14px rgba(251, 191, 36, 1);
+}
+
+.cursor-dot.clicked {
+  transform: scale(0.6);
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(139, 92, 246, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate3d(-100px, -100px, 0);
+  margin-top: -18px;
+  margin-left: -18px;
+  opacity: 0;
+  transition: opacity 0.2s ease, width 0.25s cubic-bezier(0.16, 1, 0.3, 1), height 0.25s cubic-bezier(0.16, 1, 0.3, 1), margin 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.25s ease;
+}
+
+.cursor-ring.visible {
+  opacity: 1;
+}
+
+.cursor-ring.hovered {
+  width: 54px;
+  height: 54px;
+  margin-top: -27px;
+  margin-left: -27px;
+  border-color: rgba(245, 158, 11, 0.7);
+  background-color: rgba(139, 92, 246, 0.1);
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.3);
+}
+
+.cursor-ring.clicked {
+  width: 26px;
+  height: 26px;
+  margin-top: -13px;
+  margin-left: -13px;
+  border-color: var(--accent-amber);
+}
+
+/* Flashlight ambient glow following cursor */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 480px;
+  height: 480px;
+  margin-top: -240px;
+  margin-left: -240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, rgba(245, 158, 11, 0.03) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.cursor-glow.visible {
+  opacity: 1;
+}
+
+@media (pointer: coarse) {
+  .cursor-dot, .cursor-ring, .cursor-glow {
+    display: none !important;
+  }
+}
